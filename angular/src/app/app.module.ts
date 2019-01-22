@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { ChatlistComponent } from './chatlist/chatlist.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthComponent } from './auth/auth.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { AuthComponent } from './auth/auth.component';
     ChatlistComponent,
     MessagesComponent,
     AuthComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
