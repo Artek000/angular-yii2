@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url("assets/fonts/Montserrat-Medium.ttf");
+}
 body{
     background-image: url("https://i.pinimg.com/originals/a5/88/d7/a588d7f9019cd9313cb7728e685b0172.png");
     background-size: cover;
@@ -7,10 +12,38 @@ body{
     background-repeat: no-repeat;
     color: white;
     font-family: 'Montserrat', sans-serif;
+    min-width: 550px;
 }
 
 a{
     text-decoration: none !important;
-    color: white !important;
+    color: white;
+    text-align: center;
+    align-items: center;
+}
 
+a:hover{
+    color: white;
+}
+
+a:focus{
+    color: white;
+}
+
+.button{
+    background-color: rgba(0,0,0,0.0);
+    border: 2px solid rgba(255,255,255,1);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button:hover{
+    background: rgba(255,255,255,1);
+    color: black;
+    text-decoration-color: black;
 }
