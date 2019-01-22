@@ -47,8 +47,6 @@ return [
             'rules' => [
                 'messages' => 'site/about',
                 'messages/<var:\w+>' => 'site/about',
-                'detail/<id:\d+>' => 'site/about',
-                'update/<id:\d+>' => 'site/about',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'apimessages'],
             ],
         ],

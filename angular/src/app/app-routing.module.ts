@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ChatlistComponent} from './chatlist/chatlist.component';
 import { MessagesComponent } from './messages/messages.component';
+import {AuthComponent} from './auth/auth.component';
 
 const routes: Routes = [
-    {path: 'messages', component: MessagesComponent}
+    {path: 'messages', component: MessagesComponent},
+    {path: 'login', component: AuthComponent},
 ];
 
 @NgModule({

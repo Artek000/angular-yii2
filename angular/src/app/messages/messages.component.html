@@ -1,11 +1,12 @@
 <div class="container">
   <div class="content">
-    <div class="row">
       <div *ngFor="let message of messages" class="message">
-          <p>From: {{message.from}}</p><br>
-          <p style="width:200px;height:200px;">{{message.message_text}}</p>
-        </a>
+          <div id="from_m">
+              <p>От: {{message.from}}</p>
+          </div>
+          <div id="text_m">
+              <p>{{message.message_text}}</p>
+          </div>
       </div>
-    </div>
   </div>
 </div>

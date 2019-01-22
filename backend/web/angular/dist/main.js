@@ -36,13 +36,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
+/* harmony import */ var _chatlist_chatlist_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chatlist/chatlist.component */ "./src/app/chatlist/chatlist.component.ts");
+/* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
+
 
 
 
 
 var routes = [
-    { path: 'messages', component: _messages_messages_component__WEBPACK_IMPORTED_MODULE_3__["MessagesComponent"] }
+    { path: 'messages', component: _messages_messages_component__WEBPACK_IMPORTED_MODULE_4__["MessagesComponent"] },
+    { path: 'chat', component: _chatlist_chatlist_component__WEBPACK_IMPORTED_MODULE_3__["ChatlistComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -135,6 +138,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _chatlist_chatlist_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./chatlist/chatlist.component */ "./src/app/chatlist/chatlist.component.ts");
 /* harmony import */ var _messages_messages_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./messages/messages.component */ "./src/app/messages/messages.component.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+
 
 
 
@@ -160,7 +165,7 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
             ],
-            providers: [],
+            providers: [{ provide: _angular_common__WEBPACK_IMPORTED_MODULE_9__["APP_BASE_HREF"], useValue: '/' }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
@@ -303,7 +308,7 @@ __webpack_require__.r(__webpack_exports__);
 var MessageService = /** @class */ (function () {
     function MessageService(http) {
         this.http = http;
-        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+        this.headers = new Headers({ 'Content-Type': 'application/json' });
         this.booksUrl = 'http://webchat/backend/web/apimessages'; // URL to web api
     }
     MessageService.prototype.getData = function () {
@@ -312,40 +317,26 @@ var MessageService = /** @class */ (function () {
             .then(function (response) { return response; })
             .catch(this.handleError);
     };
-    MessageService.prototype.getDetail = function (id) {
-        return this.http.get(this.booksUrl + "/" + id)
-            .toPromise()
-            .then(function (response) { return response; })
-            .catch(this.handleError);
-    };
-    MessageService.prototype.create = function (title, src, created_at, description, author) {
-        return this.http
-            .post(this.booksUrl, JSON.stringify({
-            title: title,
-            src: src,
-            created_at: created_at,
-            description: description,
-            author: author
-        }), { headers: this.headers })
-            .toPromise()
-            .then(function (res) { return res; })
-            .catch(this.handleError);
-    };
-    MessageService.prototype.update = function (book) {
-        var url = this.booksUrl + "/" + book.id;
-        return this.http
-            .put(url, JSON.stringify(book), { headers: this.headers })
-            .toPromise()
-            .then(function () { return book; })
-            .catch(this.handleError);
-    };
-    MessageService.prototype.delete = function (id) {
-        var url = this.booksUrl + "/" + id;
-        return this.http.delete(url, { headers: this.headers })
-            .toPromise()
-            // .then(() => null)
-            .catch(this.handleError);
-    };
+    // getDetail(id: number): Observable<Message> {
+    //     return this.http.get(`${this.booksUrl}/${id}`)
+    //         .toPromise()
+    //         .then(response => response as Message)
+    //         .catch(this.handleError);
+    // }
+    // create(login: string, nick: string, created_at: string, from: string, to: string, message_text: string): Observable<Message> {
+    //     return this.http
+    //         .post(this.booksUrl, JSON.stringify({
+    //             login: login,
+    //             nick: nick,
+    //             from: from,
+    //             to: to,
+    //             message_text: message_text,
+    //             created_at: created_at,
+    //         }), {headers: this.headers})
+    //         .toPromise()
+    //         .then(res => res as Message)
+    //         .catch(this.handleError);
+    // }
     MessageService.prototype.handleError = function (error) {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
@@ -381,7 +372,7 @@ module.exports = ".container{\r\n    background-color: rgba(0,0,0,0.3);\r\n    m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"content\">\n    <div class=\"row\">\n      <div *ngFor=\"let message of messages\" class=\"message\">\n          <p>From: {{message.from}}</p><br>\n          <p style=\"width:200px;height:200px;\">{{message.message_text}}</p>\n        </a>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"content\">\n    <div class=\"row\">\n      <div *ngFor=\"let message of messages\" class=\"message\">\n          <p>From: {{message.from}}</p><br>\n          <p style=\"width:200px;height:200px;\">{{message.message_text}}</p>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
